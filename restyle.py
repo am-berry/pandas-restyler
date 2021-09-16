@@ -6,7 +6,7 @@ import math
 __version__ = "0.1.0"
 
 
-class Paginator:
+class Restyler:
     def __init__(self, df, tooltip=None, clickables=None, pagesize=15, start_page=0):
         self.df = df
         self.tooltip = tooltip
@@ -57,7 +57,7 @@ class Paginator:
 
         Examples
         --------
-        >>> p = Paginator(df)
+        >>> p = Restyler(df)
         >>> p.style = p.style.bar()
 
         """
@@ -131,7 +131,7 @@ class PaginateDataFrameAccessor:
         self._obj = pandas_obj
 
     def __call__(self):
-        return Paginator(self._obj).show()
+        return Restyler(self._obj).show()
 
 
 @register_series_accessor("paginate")
@@ -140,4 +140,4 @@ class PaginateSeriesAccessor:
         self._obj = pandas_obj
 
     def __call__(self):
-        return Paginator(self._obj.to_frame()).show()
+        return Restyler(self._obj.to_frame()).show()
