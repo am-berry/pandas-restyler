@@ -3,7 +3,7 @@ import io
 import os
 import re
 
-MODULE_NAME = 'pandas_paginate'
+MODULE_NAME = 'restyle'
 README_PATH = 'README.md'
 
 
@@ -41,13 +41,13 @@ setup(
     py_modules=[MODULE_NAME],
     version=get_version(),
     license='MIT',
-    author='Nezar Abdennur',
-    author_email='nabdennur@gmail.com',
-    description='Jupyter widgets-based paginator for pandas dataframes',
+    author='Aman Berry',
+    author_email='aman.berry725@gmail.com',
+    description='Pandas dataframe styler based on pandas_jupyter_paginate by @nvictus',
     long_description=get_long_description(),
     long_description_content_type="text/markdown",
-    url='https://github.com/nvictus/pandas-jupyter-paginate',
-    keywords=['pandas', 'jupyter', 'paginator'],
+    url='https://github.com/am-berry/pandas-restyler',
+    keywords=['pandas', 'jupyter', 'paginator', 'restyler'],
     zip_safe=False,
     classifiers=[
         "Development Status :: 4 - Beta",
