@@ -7,9 +7,13 @@ __version__ = "0.1.0"
 
 
 class Paginator:
-    def __init__(self, df, tooltip=None, pagesize=15, start_page=0):
+    def __init__(self, df, tooltip=None, clickables=None, pagesize=15, start_page=0):
         self.df = df
         self.tooltip = tooltip
+        if clickables:
+            self.clickables = clickables
+        else:
+            self.clickables = []
         self.pagesize = pagesize
         self.page = start_page
         self.max_pages = math.ceil(df.shape[0] / self.pagesize)
@@ -43,9 +47,7 @@ class Paginator:
         self.content = widgets.HTML(self._render_table(self.get_page()))
 
     def get_page(self):
-        return self.df.iloc[
-            self.page * self.pagesize : (self.page + 1) * self.pagesize
-        ]
+        return self.df.iloc[self.page * self.pagesize : (self.page + 1) * self.pagesize]
 
     @property
     def style(self):
@@ -77,13 +79,16 @@ class Paginator:
         display(self.control)
         return self
 
+    def _make_clickable(self, val):
+        return '<a target="_blank" href="{}">{}</a>'.format(val, val)
+
     def _render_table(self, df):
         try:
             if self.tooltip is not None:
                 html = (
-                    df.style
-                    .use(self._styles)
+                    df.style.use(self._styles)
                     .set_tooltips(self.tooltip)
+                    .format({c: self._make_clickable for c in self.clickables})
                     .set_table_attributes('class="rendered_html"')
                     .render()
                 )
